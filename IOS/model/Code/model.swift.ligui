@@ -1,0 +1,37 @@
+import Foundation
+{% comment %} tamplateSettings {% endcomment %}
+{% assign modelName = "User" -%}
+{% assign names = "name|age|phone" | split: "|" -%}
+{% assign types = "String|Int|String" | split: "|" -%}
+{% comment %} varibles {% endcomment -%}
+{% assign size = names.size | plus: -1 -%}
+
+class {{ modelName }}Model {
+	{% for i in (0..size) -%}
+  	var {{ names[i] }}: {{types[i]}}!
+	{% endfor %}
+	init(
+		{% for i in (0..size) -%}
+		{% if i != size -%}
+  		{{ names[i] }}: {{types[i]}},
+  		{% else -%}
+  		{{ names[i] }}: {{types[i]}}
+		{% endif -%}
+		{% endfor %}
+	) 
+	   {
+		{% for i in (0..size) -%}
+	 	self.{{ names[i] }} = {{ names[i] }}
+	 	{% endfor %}
+	   }
+
+	{% for i in (0..size) -%}
+	func set{{ names[i] | capitalize}}(new{{ names[i] | capitalize}}: {{types[i]}}) {
+	self.{{ names[i] }} = new{{ names[i] | capitalize}}
+	}
+
+	func get{{ names[i] | capitalize }}() -> {{types[i]}} {
+	return self.{{ names[i] }}
+	}
+	{% endfor %}
+}

@@ -1,0 +1,12 @@
+# Template information section
+name: «model»
+summary: «Model»
+author: «Bogachov»
+version: «1.0»
+license: "MIT"
+
+# The declarations for code files
+code_files:
+# Model
+- {name: xuy/Model.swift, path: Code/model.swift.ligui}
+
